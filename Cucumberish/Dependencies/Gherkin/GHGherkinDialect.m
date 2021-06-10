@@ -31,6 +31,7 @@
 @synthesize andStepKeywords;
 @synthesize butStepKeywords;
 @synthesize stepKeywords;
+@synthesize stepKeywordDict;
 
 - (id)initWithLanguage:(NSString *)theLanguage featureKeywords:(NSArray<NSString *> *)theFeatureKeywords
     backgroundKeywords:(NSArray<NSString *> *)theBackgroundKeywords scenarioKeywords:(NSArray<NSString *> *)theScenarioKeywords
@@ -55,7 +56,15 @@ scenarioOutlineKeywords:(NSArray<NSString *> *)theScenarioOutlineKeywords exampl
         
         stepKeywords = [[[[givenStepKeywords arrayByAddingObjectsFromArray: whenStepKeywords] arrayByAddingObjectsFromArray: thenStepKeywords] arrayByAddingObjectsFromArray: andStepKeywords] arrayByAddingObjectsFromArray: butStepKeywords];
         // Distinct using an NSOrderedSet
-        stepKeywords = [[[NSOrderedSet alloc] initWithArray: stepKeywords] array];        
+        stepKeywords = [[[NSOrderedSet alloc] initWithArray: stepKeywords] array];
+        
+        NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+        [dict setObject:givenStepKeywords forKey:@"Given"];
+        [dict setObject:whenStepKeywords forKey:@"When"];
+        [dict setObject:thenStepKeywords forKey:@"Then"];
+        [dict setObject:andStepKeywords forKey:@"And"];
+        [dict setObject:butStepKeywords forKey:@"But"];
+        stepKeywordDict = dict;
     }
     
     return self;

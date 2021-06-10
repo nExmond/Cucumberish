@@ -14,6 +14,7 @@
 @property (nonatomic, readonly) NSArray<NSString *> * andStepKeywords;
 @property (nonatomic, readonly) NSArray<NSString *> * butStepKeywords;
 @property (nonatomic, readonly) NSArray<NSString *> * stepKeywords;
+@property (nonatomic, readonly) NSDictionary<NSString *, NSArray<NSString *> *> * stepKeywordDict;
 
 - (id)initWithLanguage:(NSString *)theLanguage featureKeywords:(NSArray<NSString *> *)theFeatureKeywords
     backgroundKeywords:(NSArray<NSString *> *)theBackgroundKeywords scenarioKeywords:(NSArray<NSString *> *)theScenarioKeywords

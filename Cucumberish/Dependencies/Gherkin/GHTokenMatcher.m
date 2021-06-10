@@ -248,15 +248,19 @@
 
 - (BOOL)matchStepLineWithToken:(GHToken *)theToken
 {
-    NSArray<NSString *> * keywords = [currentDialect stepKeywords];
-    for (NSString * keyword in keywords)
+    NSDictionary<NSString *, NSArray<NSString *> *> * keywordDict = [currentDialect stepKeywordDict];
+    for (NSString * key in keywordDict.allKeys)
     {
-        if ([[theToken line] hasPrefix: keyword])
+        NSArray<NSString *> * keywords = [keywordDict objectForKey: key];
+        for (NSString * keyword in keywords)
         {
-            NSString * stepText = [[theToken line] trimmedRest: [keyword length]];
-            [self setTokenMatched: theToken tokenType: GHTokenTypeStepLine text: stepText keyword: keyword indent: nil items: nil];
-            
-            return YES;
+            if ([[theToken line] hasPrefix: keyword])
+            {
+                NSString * stepText = [[theToken line] trimmedRest: [keyword length]];
+                [self setTokenMatched: theToken tokenType: GHTokenTypeStepLine text: stepText keyword: key indent: nil items: nil];
+                
+                return YES;
+            }
         }
     }
     
